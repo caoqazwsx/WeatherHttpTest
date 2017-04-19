@@ -1,15 +1,12 @@
 package com.zhao.weather.activity;
 
 import android.os.Bundle;
-
 import android.support.v7.app.AppCompatActivity;
+import android.widget.EditText;
 import android.widget.TextView;
 
-
 import com.zhao.weather.R;
-
 import com.zhao.weather.presenter.MainPresenter;
-
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -20,9 +17,11 @@ public class MainActivity extends AppCompatActivity {
     TextView textCity;
     @InjectView(R.id.text_temp)
     TextView textTemp;
+    @InjectView(R.id.et_key)
+    EditText etKey;
+
 
     private MainPresenter mMainPresenter;
-
 
 
     @Override
@@ -43,5 +42,7 @@ public class MainActivity extends AppCompatActivity {
         return textTemp;
     }
 
-
+    public EditText getEtKey() {
+        return etKey;
+    }
 }

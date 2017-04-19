@@ -50,6 +50,14 @@ public class CommonApi {
 
     }
 
+    /**
+     * 上传位置信息
+     * @param key
+     * @param latitude
+     * @param longitude
+     * @param description
+     * @param callback
+     */
     public static void updateLocation(String key,double latitude,double longitude,String description,final ResultCallback callback){
         Map<String,Object> params = new HashMap<>();
         if(!StringHelper.isEmpty(key)){

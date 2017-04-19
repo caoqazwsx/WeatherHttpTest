@@ -17,7 +17,6 @@ import com.zhao.weather.util.CacheHelper;
 import com.zhao.weather.util.StringHelper;
 import com.zhao.weather.webapi.CommonApi;
 
-import org.greenrobot.greendao.annotation.Entity;
 
 /**
  * Created by zhao on 2017/4/19.
@@ -46,6 +45,9 @@ public class MainPresenter implements BasePresenter {
                 case 2:
                     mMainActivity.getTextTemp().setText(mWeather.getTemperature2() + "—" + mWeather.getTemperature1() + "℃");
                     break;
+                case 3:
+                    mMainActivity.getEtKey().setText(APPCONST.KEY);
+                    break;
 
             }
         }
@@ -57,11 +59,10 @@ public class MainPresenter implements BasePresenter {
 
     @Override
     public void start() {
-
         init();
     }
 
-    public void init(){
+    private void init(){
         initKey();
         initLocation();
     }
@@ -89,8 +90,6 @@ public class MainPresenter implements BasePresenter {
             APPCONST.KEY = sysData.getId();
             APPCONST.DESCRIPTION = sysData.getDescription();
         }
-
-
     }
 
 
@@ -114,7 +113,7 @@ public class MainPresenter implements BasePresenter {
         //设置定位模式为AMapLocationMode.Hight_Accuracy，高精度模式。
         mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
         //设置定位间隔,单位毫秒,默认为2000ms，最低1000ms。
-        mLocationOption.setInterval(10000);
+        mLocationOption.setInterval(5000);
         //设置是否返回地址信息（默认返回地址信息）
         mLocationOption.setNeedAddress(true);
         //获取一次定位结果：
@@ -140,6 +139,8 @@ public class MainPresenter implements BasePresenter {
                         sysData.setDescription("");
                         CacheHelper.saveObject(sysData, APPCONST.SYS_DATA_FILE_NAME);
                     }
+                    handler.sendMessage(handler.obtainMessage(3));
+
                 }
 
             }
